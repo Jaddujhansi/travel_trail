@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="update-header">
+    <div class="container">
+        <h1>Your Updated Travel Plan</h1>
+    </div>
+</section>
+
+<section class="travel-plan-content">
+    <div class="container">
+        <div class="plan-actions">
+            <button class="btn" onclick="printPlan()"><i class="fas fa-print"></i> Print</button>
+            <a href="/" class="btn btn-primary"><i class="fas fa-plus"></i> Plan New Trip</a>
+        </div>
+        
+        <div class="travel-plan-body">
+            <div class="markdown-content">
+                {{ updated_plan | safe }}
+            </div>
+        </div>
+        
+        <div class="back-to-plan">
+            <a href="javascript:history.back()" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to Previous Plan</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function printPlan() {
+        window.print();
+    }
+</script>
+{% endblock %}

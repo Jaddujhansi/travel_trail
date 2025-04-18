@@ -1,0 +1,32 @@
+/* static/markdown.css */
+.markdown-content {
+    line-height: 1.6;
+    font-family: "Segoe UI", sans-serif;
+    padding: 1rem;
+  }
+  
+  .markdown-content h2 {
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 0.4rem;
+  }
+  
+  .markdown-content h3 {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+  }
+  
+  .markdown-content ul, .markdown-content ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .markdown-content p {
+    margin-bottom: 1rem;
+  }
+  
+  .markdown-content strong {
+    font-weight: bold;
+  }
+  

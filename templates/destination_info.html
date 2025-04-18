@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="destination-header">
+    <div class="container">
+        <h1>Discover {{ destination }}</h1>
+    </div>
+</section>
+
+<section class="destination-content">
+    <div class="container">
+        <div class="destination-info">
+            <div class="markdown-content">
+                {{ info | safe }}
+            </div>
+        </div>
+        
+        <div class="back-to-plan">
+            <a href="javascript:history.back()" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to Your Plan</a>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

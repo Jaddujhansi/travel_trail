@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="travel-plan-header">
+    <div class="container">
+        <h1>Your Travel Plan for {{ destination }}</h1>
+        <div class="travel-details">
+            <div class="detail">
+                <i class="fas fa-calendar-alt"></i>
+                <span>{{ start_date }} to {{ end_date }}</span>
+            </div>
+            <div class="detail">
+                <i class="fas fa-heart"></i>
+                <span>Interests: {{ interests }}</span>
+            </div>
+            <div class="detail">
+                <i class="fas fa-money-bill-wave"></i>
+                <span>Budget: {{ budget }}</span>
+            </div>
+        </div>
+    </div>
+</section>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+<section class="travel-plan-content">
+    <div class="container">
+        <div class="plan-actions">
+            <button class="btn btn-primary" onclick="printPlan()"><i class="fas fa-print"></i> Print</button>
+            <button class="btn btn-secondary" onclick="showUpdateForm()"><i class="fas fa-edit"></i> Modify Plan</button>
+        </div>
+        
+        <div class="travel-plan-body">
+            <div class="markdown-content">
+                {{ travel_plan | safe }}
+            </div>
+        </div>
+        
+        <div id="update-form" class="update-form" style="display: none;">
+            <h3>Request Changes to Your Plan</h3>
+            <form action="/update-plan" method="post">
+                <input type="hidden" name="current_plan" value="{{ travel_plan }}">
+                <div class="form-group">
+                    <label for="update_request">What would you like to change?</label>
+                    <textarea id="update_request" name="update_request" rows="4" placeholder="e.g., Add more outdoor activities, focus more on budget dining options, etc." required></textarea>
+                </div>
+                <div class="form-buttons">
+                    <button type="submit" class="btn btn-primary">Update Plan</button>
+                    <button type="button" class="btn btn-outline" onclick="hideUpdateForm()">Cancel</button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="explore-more">
+            <h3>Explore More</h3>
+            <div class="actions-grid">
+                <a href="/explore-destination/{{ destination }}" class="action-card">
+                    <i class="fas fa-info-circle"></i>
+                    <h4>Learn More About {{ destination }}</h4>
+                </a>
+                <a href="/quick-ideas/{{ destination }}/food" class="action-card">
+                    <i class="fas fa-utensils"></i>
+                    <h4>Food Ideas</h4>
+                </a>
+                <a href="/quick-ideas/{{ destination }}/activities" class="action-card">
+                    <i class="fas fa-hiking"></i>
+                    <h4>Activity Ideas</h4>
+                </a>
+                <a href="/" class="action-card">
+                    <i class="fas fa-plus"></i>
+                    <h4>Plan Another Trip</h4>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function printPlan() {
+        window.print();
+    }
+    
+    function showUpdateForm() {
+        document.getElementById('update-form').style.display = 'block';
+        document.getElementById('update-form').scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    function hideUpdateForm() {
+        document.getElementById('update-form').style.display = 'none';
+    }
+</script>
+{% endblock %}

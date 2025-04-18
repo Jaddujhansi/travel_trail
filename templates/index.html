@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <h1>Plan Your Dream Trip with AI</h1>
+        <p>Personalized travel itineraries created just for you</p>
+        <a href="#planner" class="btn btn-primary">Start Planning</a>
+    </div>
+</section>
+
+<section id="about" class="about-section">
+    <div class="container">
+        <h2>About Travel Trail</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Travel Trail uses advanced AI technology to create personalized travel plans based on your preferences, budget, and interests. Let our intelligent system take the stress out of planning your next adventure.</p>
+                <p>Powered by Google's Gemini 1.5 Pro, we provide detailed itineraries, local insights, and real-time updates to ensure your trip is perfect from start to finish.</p>
+            </div>
+            <div class="about-image">
+                <img src="{{ url_for('static', path='/images/travel-planning.jpg') }}" alt="Travel Planning">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="features" class="features-section">
+    <div class="container">
+        <h2>Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-map-marked-alt"></i>
+                <h3>Custom Itineraries</h3>
+                <p>Detailed day-by-day travel plans tailored to your preferences</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-landmark"></i>
+                <h3>Sightseeing Spots</h3>
+                <p>Discover the best attractions at your destination</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-money-bill-wave"></i>
+                <h3>Budget Planning</h3>
+                <p>Stay within your budget with cost estimates and tips</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-clock"></i>
+                <h3>Real-time Updates</h3>
+                <p>Quick adjustments to your plans with Gemini Flash</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="planner" class="planner-section">
+    <div class="container">
+        <h2>Create Your Travel Plan</h2>
+        <form action="/create-plan" method="post" class="travel-form">
+            <div class="form-group">
+                <label for="destination">Destination</label>
+                <input type="text" id="destination" name="destination" placeholder="e.g., Paris, Tokyo, New York" required>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="start_date">Start Date</label>
+                    <input type="date" id="start_date" name="start_date" required>
+                </div>
+                <div class="form-group">
+                    <label for="end_date">End Date</label>
+                    <input type="date" id="end_date" name="end_date" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="interests">Interests</label>
+                <input type="text" id="interests" name="interests" placeholder="e.g., history, food, outdoors, art" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="budget">Budget</label>
+                <select id="budget" name="budget" required>
+                    <option value="">Select your budget range</option>
+                    <option value="budget">Budget ($0-$100 per day)</option>
+                    <option value="moderate">Moderate ($100-$300 per day)</option>
+                    <option value="luxury">Luxury ($300+ per day)</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Generate Travel Plan</button>
+        </form>
+    </div>
+</section>
+
+<section id="contact" class="contact-section">
+    <div class="container">
+        <h2>Contact Us</h2>
+        <p>Have questions about Travel Trail? Reach out to us!</p>
+        <div class="contact-info">
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <p>info@traveltrail.com</p>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <p>+1 (123) 456-7890</p>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <p>123 Travel Street, Adventure City</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Set minimum date to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('start_date').min = today;
+        document.getElementById('end_date').min = today;
+        
+        // Update end date minimum when start date changes
+        document.getElementById('start_date').addEventListener('change', function() {
+            document.getElementById('end_date').min = this.value;
+            if (document.getElementById('end_date').value < this.value) {
+                document.getElementById('end_date').value = this.value;
+            }
+        });
+    });
+</script>
+{% endblock %}
